@@ -1,7 +1,19 @@
 *.class
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+# Build output
+/target/
+/logs/
+
+# Eclipse files
+/.classpath
+/.project
+/.settings/
+
+# Intellij files
+/*.iml
+/*.ipr
+/*.iws
+/.idea/
 
 # Package Files #
 *.jar
