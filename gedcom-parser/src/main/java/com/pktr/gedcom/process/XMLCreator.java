@@ -31,6 +31,8 @@ public class XMLCreator {
     private File outputFile;
     
     private NodeParser parser;
+    
+    public static  final String ROOT = "gedcom";
 
     public XMLCreator(String inputFileName, String outputFileName, NodeParser parser) {
         this.inputFile = new File(inputFileName);
@@ -65,7 +67,7 @@ public class XMLCreator {
 
     private void populateDocument(Document xmlDocument, Map<ParentNode, List<ChildNode>> xmlMap) {
         if(xmlMap != null && isNotEmpty(xmlMap.entrySet()) && xmlDocument != null) {
-            Element rootElement = xmlDocument.createElement(GedcomCLI.ROOT);
+            Element rootElement = xmlDocument.createElement(ROOT);
             xmlDocument.appendChild(rootElement);
             
             for (Map.Entry<ParentNode, List<ChildNode>> entry : xmlMap.entrySet())

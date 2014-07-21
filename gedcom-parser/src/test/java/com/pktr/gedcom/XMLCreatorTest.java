@@ -25,7 +25,9 @@ import com.pktr.gedcom.process.NodeParser;
 import com.pktr.gedcom.process.XMLCreator;
 
 @RunWith(MockitoJUnitRunner.class)
-public class XMLCreatorTest {
+public class XMLCreatorTest extends GedcomTestBase {
+
+   
 
     @Mock
     NodeParser parser;
@@ -39,26 +41,32 @@ public class XMLCreatorTest {
     }
     
     @Test
-    public void testGenerateDocument() throws ParserConfigurationException {
-        when(parser.toNodeElements(anyString())).thenReturn(createMap());
+    public void testGenerateDocumentWithOneChild() throws ParserConfigurationException {
+        Map<ParentNode, List<ChildNode>> oneChildMap = createMapWithSingleChild();
+        when(parser.toNodeElements(anyString())).thenReturn(oneChildMap);
         String location = xmlCreator.generateXMLDocument();
         assertThat(location, containsString(GedcomCLI.GEDCOM_OUTPUT_FILE));
+        assertFileContents(location, oneChildMap);
+    }
+    
+    @Test
+    public void testGenerateDocumentWithSecondaryChild() throws ParserConfigurationException {
+        Map<ParentNode, List<ChildNode>> oneChildMap = createMapWithSingleChild();
+        when(parser.toNodeElements(anyString())).thenReturn(oneChildMap);
+        String location = xmlCreator.generateXMLDocument();
+        assertThat(location, containsString(GedcomCLI.GEDCOM_OUTPUT_FILE));
+        assertFileContents(location, oneChildMap);
     }
 
-    private Map<ParentNode, List<ChildNode>> createMap() {
-        ParentNode parentNode = new ParentNode();
-        parentNode.setTagName("INDI");
-        parentNode.setAttributeName("id");
-        parentNode.setAttributeValue("@I1@");
-        
-        ChildNode childNode = new ChildNode();
-        childNode.setTagName("name");
-        childNode.setAttributeName("value");
-        childNode.setAttributeValue("Pradeep Kumar /Thopae/");
-        
+
+    private Map<ParentNode, List<ChildNode>> createMapWithSingleChild() {
+        ParentNode parentNode = createParentNode("INDI", "id", "@I1@");
+        ChildNode childNode = createChildNode(false);
         Map<ParentNode, List<ChildNode>> dummyMap = new HashMap<ParentNode, List<ChildNode>>();
         dummyMap.put(parentNode, Arrays.asList(childNode));
-        
         return dummyMap;
     }
+    
+
+    
 }

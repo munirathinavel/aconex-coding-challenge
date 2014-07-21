@@ -7,6 +7,8 @@ import static org.junit.Assert.assertNotNull;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -20,6 +22,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import com.pktr.gedcom.process.XMLCreator;
 import com.pktr.gedcom.util.FileXMLUtil;
 
 public class FileUtilTest {
@@ -27,6 +30,13 @@ public class FileUtilTest {
     private static final String TEST_CONTENT = "Test content";
     private static final String FIRST_CHILD = "firstChild";
     private Document document;
+    private static final ThreadLocal<SimpleDateFormat> formatter = new ThreadLocal<SimpleDateFormat>(){
+        @Override
+        protected SimpleDateFormat initialValue()
+        {
+            return new SimpleDateFormat("yyyyMMdd HHmm");
+        }
+    };
 
     @Before
     public void setUp() throws ParserConfigurationException {
@@ -35,7 +45,7 @@ public class FileUtilTest {
 
         // root elements
         document = docBuilder.newDocument();
-        Element rootElement = document.createElement(GedcomCLI.ROOT);
+        Element rootElement = document.createElement(XMLCreator.ROOT);
         document.appendChild(rootElement);
 
         // staff elements
@@ -53,7 +63,11 @@ public class FileUtilTest {
 
     @Test
     public void testWriteToFile() throws ParserConfigurationException, SAXException, IOException {
-        File outputFile = new File(GedcomCLI.GEDCOM_OUTPUT_FILE);
+        String formattedTime = formatter.get().format(new Date(System.currentTimeMillis()));
+        StringBuilder builder = new StringBuilder();
+        builder.append(formattedTime);
+        builder.append(GedcomCLI.GEDCOM_OUTPUT_FILE);
+        File outputFile = new File(builder.toString());
         FileXMLUtil.writeDocumentToFile(document, outputFile);
         assertOutputFile(outputFile);
     }
@@ -66,24 +80,16 @@ public class FileUtilTest {
             NodeList nodeList = doc.getChildNodes();
 
             for (int count = 0; count < nodeList.getLength(); count++) {
-
                 Node tempNode = nodeList.item(count);
-
                 // make sure it's element node.
                 if (tempNode.getNodeType() == Node.ELEMENT_NODE) {
-
                     // get node name and value
-                    assertThat(tempNode.getNodeName(), is(equalTo(GedcomCLI.ROOT)));
+                    assertThat(tempNode.getNodeName(), is(equalTo(XMLCreator.ROOT)));
                     assertThat(tempNode.getTextContent(), is(equalTo(TEST_CONTENT)));
                     assertThat(tempNode.getFirstChild().getNodeName(), is(FIRST_CHILD));
-
                 }
 
             }
-
         }
-
     }
-
-
 }
