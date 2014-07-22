@@ -1,5 +1,12 @@
 package com.pktr.gedcom.process;
 
+import static com.pktr.gedcom.model.GedcomConstants.ATTRIBUTE_NAME;
+import static com.pktr.gedcom.model.GedcomConstants.PARENT_ATTRIBUTE_ID;
+import static com.pktr.gedcom.model.GedcomConstants.PARENT_DELIMITER;
+import static com.pktr.gedcom.model.GedcomConstants.PRIMARY_CHILD_DELIMITER;
+import static com.pktr.gedcom.model.GedcomConstants.SECONDARY_CHILD_DELIMITER;
+import static com.pktr.gedcom.util.CommonUtil.isEmpty;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -9,9 +16,6 @@ import java.util.Map;
 import com.pktr.gedcom.model.ChildNode;
 import com.pktr.gedcom.model.ParentNode;
 
-import static com.pktr.gedcom.model.GedcomConstants.*;
-import static com.pktr.gedcom.util.FileXMLUtil.*;
-
 /**
  * Class for converting the TXT file contents to a Map representation
  * 
@@ -19,10 +23,9 @@ import static com.pktr.gedcom.util.FileXMLUtil.*;
  */
 public class NodeParser {
 
-
     /**
      * @param fileData - TXT file contents in the form of String
-     * @return Map containing XML data in the form of Parent-Child, where Child might have children
+     * @return Map containing XML data in the form of Parent-Child, where Child might have children if secondary nodes are present
      */
     public Map<ParentNode, List<ChildNode>> toNodeElements(String fileData) {
         Map<ParentNode, List<ChildNode>> parentChildMap = new HashMap<ParentNode, List<ChildNode>>();
@@ -60,19 +63,16 @@ public class NodeParser {
                         hasSecondaryChildren = true;
                     }
                     ChildNode childNode = new ChildNode();
-                    if(hasSecondaryChildren) {
-                        childNode.setAttributeName(ATTRIBUTE_NAME);
-                        if (childrenElements.length > 1) {
+                    childNode.setTagName(childrenElements[0]);
+                    if (childrenElements.length > 1) {
+                        if (hasSecondaryChildren) {
+                            childNode.setAttributeName(ATTRIBUTE_NAME);
                             childNode.setAttributeValue(childrenElements[1]);
-                        }
-                    }
-                    else {
-                        childNode.setTagName(childrenElements[0]);
-                        if (childrenElements.length > 1) {
+                        } else {
                             childNode.setTagValue(childrenElements[1]);
                         }
                     }
-                    if(hasSecondaryChildren) {
+                    if (hasSecondaryChildren) {
                         childNode.setChildren(createSecondaryChildren(child));
                     }
                     childList.add(childNode);
@@ -94,7 +94,7 @@ public class NodeParser {
                     String[] childrenElements = secondaryChild.split(" ");
                     ChildNode secondaryChildNode = new ChildNode();
                     secondaryChildNode.setTagName(childrenElements[0]);
-                    if(childrenElements.length > 1) {
+                    if (childrenElements.length > 1) {
                         secondaryChildNode.setTagValue(childrenElements[1]);
                     }
                     childList.add(secondaryChildNode);
@@ -112,7 +112,7 @@ public class NodeParser {
 
         parentNode.setAttributeName(PARENT_ATTRIBUTE_ID);
         parentNode.setAttributeValue(parentAttributes[0]);
-        if(parentAttributes.length > 1) {
+        if (parentAttributes.length > 1) {
             parentNode.setTagName(parentAttributes[1]);
         }
         return parentNode;
@@ -121,5 +121,5 @@ public class NodeParser {
     private int getChildIndexIfExist(String nodeElement, String delimiter) {
         return nodeElement.indexOf(delimiter) != -1 ? nodeElement.indexOf(delimiter) : nodeElement.length();
     }
-    
+
 }

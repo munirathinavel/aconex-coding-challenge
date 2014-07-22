@@ -68,7 +68,6 @@
 1 NAME Edward Antony Richard Louis
 1 SEX M
 1 BIRT
-2 DATE 10 Mar 1964
 1 FAMC @F0001@
 0 @I0010@ INDI
 1 NAME Diana /Spencer/
@@ -93,7 +92,6 @@
 1 BIRT
 2 DATE 1865
 1 DEAT Y
-2 DATE 1936
 1 FAMC @F0006@
 1 FAMS @F0005@
 1 NOTE @N0003@
@@ -621,7 +619,6 @@
 1 BIRT
 2 DATE 1876
 1 DEAT Y
-2 DATE 1936
 1 FAMC @F0026@
 1 FAMS @F0029@
 1 FAMS @F0030@
@@ -828,7 +825,6 @@
 1 NAME Alexandra
 1 SEX F
 1 BIRT
-2 DATE 1936
 1 TITL Princess Alexandra of Kent
 1 FAMC @F0019@
 1 FAMS @F0039@
@@ -2714,7 +2710,6 @@
 1 MARR
 2 DATE 1928
 1 DIV
-2 DATE 1936
 0 @F0022@ FAM
 1 HUSB @I0060@
 1 WIFE @I0023@
@@ -3335,7 +3330,6 @@
 1 CONC Succeeded father in 1910, crowned 1911
 0 @N0004@ NOTE
 1 CONC Created Duke of York 1920
-1 CONT Succeeded to throne on Edward VIII's abdication in 1936, crowned 1937
 0 @N0005@ NOTE
 1 CONC 5 sons and 1 dau
 0 @N0006@ NOTE
@@ -3345,7 +3339,6 @@
 1 CONT Succeeded to throne in 1901, crowned 1902
 0 @N0008@ NOTE
 1 CONC Created Prince of Wales in 1910
-1 CONT Succeeded to throne on 20 Jan 1936
 1 CONT Abdicated 11 Dec 1936
 1 CONT 
 0 @N0009@ NOTE

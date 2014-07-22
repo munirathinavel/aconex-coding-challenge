@@ -9,12 +9,10 @@ import com.pktr.gedcom.model.ParentNode;
 import static com.pktr.gedcom.model.GedcomConstants.*;
 
 public class GedcomTestBase {
-    
-    
 
     protected ChildNode createChildNode(boolean hasChildren) {
         ChildNode childNode = createChildNode("name", EMPTY_STRING, "value", "Pradeep Kumar /Thopae/");
-        if(hasChildren) {
+        if (hasChildren) {
             ChildNode secondaryChild = createChildNode("sur", "Buck", EMPTY_STRING, EMPTY_STRING);
             childNode.setChildren(Arrays.asList(secondaryChild));
         }
@@ -37,9 +35,9 @@ public class GedcomTestBase {
         parentNode.setAttributeValue(attributeValue);
         return parentNode;
     }
-    
+
     protected void assertFileContents(String location, Map<ParentNode, List<ChildNode>> xmlMap) {
         // TODO Auto-generated method stub
-        
+
     }
 }

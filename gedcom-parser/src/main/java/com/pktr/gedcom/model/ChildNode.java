@@ -128,6 +128,5 @@ public class ChildNode {
         builder.append("]");
         return builder.toString();
     }
-    
-    
+
 }

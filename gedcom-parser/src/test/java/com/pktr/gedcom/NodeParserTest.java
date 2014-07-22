@@ -27,7 +27,7 @@ public class NodeParserTest extends GedcomTestBase {
     private ParentNode parentNode;
 
     private ChildNode primaryChildwithTags;
-    
+
     private ChildNode primaryChildWithAttributes;
 
     private ChildNode secondaryChild;
@@ -40,10 +40,10 @@ public class NodeParserTest extends GedcomTestBase {
 
         primaryChildwithTags = createChildNode("NAME", "James", null, null);
 
-        primaryChildWithAttributes = createChildNode(null, null, "value", "James");
-        
+        primaryChildWithAttributes = createChildNode("NAME", null, "value", "James");
+
         secondaryChild = createChildNode("SUR", "Junior", null, null);
-        
+
         primaryChildWithAttributes.setChildren(Arrays.asList(secondaryChild));
     }
 

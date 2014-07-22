@@ -23,17 +23,20 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import com.pktr.gedcom.model.GedcomConstants;
-import com.pktr.gedcom.util.FileXMLUtil;
+import com.pktr.gedcom.util.CommonUtil;
 
-public class FileUtilTest {
+public class FileXMLUtilTest {
 
     private static final String TEST_CONTENT = "Test content";
+
     private static final String FIRST_CHILD = "firstChild";
+
     private Document document;
-    private static final ThreadLocal<SimpleDateFormat> formatter = new ThreadLocal<SimpleDateFormat>(){
+
+    private static final ThreadLocal<SimpleDateFormat> formatter = new ThreadLocal<SimpleDateFormat>() {
+
         @Override
-        protected SimpleDateFormat initialValue()
-        {
+        protected SimpleDateFormat initialValue() {
             return new SimpleDateFormat("yyyyMMdd HHmm");
         }
     };
@@ -57,7 +60,7 @@ public class FileUtilTest {
     @Test
     public void testReadContent() {
         File f = new File(GedcomCLI.GEDCOM_INPUT_FILE);
-        String data = FileXMLUtil.readAsString(f);
+        String data = CommonUtil.readAsString(f);
         assertNotNull("Failed to read content from file", data);
     }
 
@@ -69,7 +72,7 @@ public class FileUtilTest {
         builder.append("-");
         builder.append(GedcomCLI.GEDCOM_OUTPUT_FILE);
         File outputFile = new File(builder.toString());
-        FileXMLUtil.writeDocumentToFile(document, outputFile);
+        CommonUtil.writeDocumentToFile(document, outputFile);
         assertOutputFile(outputFile);
     }
 
