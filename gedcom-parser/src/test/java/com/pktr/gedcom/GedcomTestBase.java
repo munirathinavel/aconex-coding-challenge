@@ -6,11 +6,11 @@ import java.util.Map;
 
 import com.pktr.gedcom.model.ChildNode;
 import com.pktr.gedcom.model.ParentNode;
-
+import static com.pktr.gedcom.model.GedcomConstants.*;
 
 public class GedcomTestBase {
     
-    protected static final String EMPTY_STRING = "";
+    
 
     protected ChildNode createChildNode(boolean hasChildren) {
         ChildNode childNode = createChildNode("name", EMPTY_STRING, "value", "Pradeep Kumar /Thopae/");

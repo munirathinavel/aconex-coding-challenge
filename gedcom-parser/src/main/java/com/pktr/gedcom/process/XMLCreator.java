@@ -13,10 +13,11 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import com.pktr.gedcom.GedcomCLI;
 import com.pktr.gedcom.model.ChildNode;
+import com.pktr.gedcom.model.GedcomConstants;
 import com.pktr.gedcom.model.ParentNode;
 import com.pktr.gedcom.util.FileXMLUtil;
+import static com.pktr.gedcom.util.FileXMLUtil.*;
 
 /**
  * This class is the heart of gedcom-parser, takes the input TXT file and convert to XML file 
@@ -32,7 +33,6 @@ public class XMLCreator {
     
     private NodeParser parser;
     
-    public static  final String ROOT = "gedcom";
 
     public XMLCreator(String inputFileName, String outputFileName, NodeParser parser) {
         this.inputFile = new File(inputFileName);
@@ -67,7 +67,7 @@ public class XMLCreator {
 
     private void populateDocument(Document xmlDocument, Map<ParentNode, List<ChildNode>> xmlMap) {
         if(xmlMap != null && isNotEmpty(xmlMap.entrySet()) && xmlDocument != null) {
-            Element rootElement = xmlDocument.createElement(ROOT);
+            Element rootElement = xmlDocument.createElement(GedcomConstants.ROOT);
             xmlDocument.appendChild(rootElement);
             
             for (Map.Entry<ParentNode, List<ChildNode>> entry : xmlMap.entrySet())
@@ -76,7 +76,8 @@ public class XMLCreator {
                 Element parentElement = xmlDocument.createElement(parent.getTagName());
                 parentElement.setAttribute(parent.getAttributeName(), parent.getAttributeValue());
                 for (ChildNode childNode  : entry.getValue()) {
-                    addChildren(parentElement, childNode, xmlDocument);
+                    System.out.println(childNode);
+                    //addChildren(parentElement, childNode, xmlDocument);
                 }
                 rootElement.appendChild(parentElement);
             }
@@ -87,7 +88,9 @@ public class XMLCreator {
     private void addChildren(Element parentElement, ChildNode child, Document xmlDocument) {
         Element childElement = xmlDocument.createElement(child.getTagName());
         childElement.setTextContent(child.getTagValue());
-        childElement.setAttribute(child.getAttributeName(), child.getAttributeValue());
+        final String attributeName = isEmpty(child.getAttributeName()) ? GedcomConstants.EMPTY_STRING : child.getAttributeName();
+        final String attributeValue = isEmpty(child.getAttributeValue()) ? GedcomConstants.EMPTY_STRING : child.getAttributeValue();
+        //childElement.setAttribute(attributeName, attributeValue);
         if(child.hasChildren()) {
             for (ChildNode secondLevelChild : child.getChildren()) {
                 addChildren(childElement, secondLevelChild, xmlDocument);

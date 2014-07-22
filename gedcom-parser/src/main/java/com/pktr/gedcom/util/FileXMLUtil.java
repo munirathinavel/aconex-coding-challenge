@@ -58,5 +58,9 @@ public class FileXMLUtil {
             e.printStackTrace();
         }
     }
+    
+    public static boolean isEmpty(String fileData) {
+        return fileData == null || fileData.length() == 0;
+    }
 
 }

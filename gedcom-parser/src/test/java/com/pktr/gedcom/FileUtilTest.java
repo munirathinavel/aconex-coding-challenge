@@ -22,7 +22,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import com.pktr.gedcom.process.XMLCreator;
+import com.pktr.gedcom.model.GedcomConstants;
 import com.pktr.gedcom.util.FileXMLUtil;
 
 public class FileUtilTest {
@@ -45,7 +45,7 @@ public class FileUtilTest {
 
         // root elements
         document = docBuilder.newDocument();
-        Element rootElement = document.createElement(XMLCreator.ROOT);
+        Element rootElement = document.createElement(GedcomConstants.ROOT);
         document.appendChild(rootElement);
 
         // staff elements
@@ -66,6 +66,7 @@ public class FileUtilTest {
         String formattedTime = formatter.get().format(new Date(System.currentTimeMillis()));
         StringBuilder builder = new StringBuilder();
         builder.append(formattedTime);
+        builder.append("-");
         builder.append(GedcomCLI.GEDCOM_OUTPUT_FILE);
         File outputFile = new File(builder.toString());
         FileXMLUtil.writeDocumentToFile(document, outputFile);
@@ -84,7 +85,7 @@ public class FileUtilTest {
                 // make sure it's element node.
                 if (tempNode.getNodeType() == Node.ELEMENT_NODE) {
                     // get node name and value
-                    assertThat(tempNode.getNodeName(), is(equalTo(XMLCreator.ROOT)));
+                    assertThat(tempNode.getNodeName(), is(equalTo(GedcomConstants.ROOT)));
                     assertThat(tempNode.getTextContent(), is(equalTo(TEST_CONTENT)));
                     assertThat(tempNode.getFirstChild().getNodeName(), is(FIRST_CHILD));
                 }

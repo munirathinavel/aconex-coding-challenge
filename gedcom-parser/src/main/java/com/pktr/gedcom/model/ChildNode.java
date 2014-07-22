@@ -111,5 +111,23 @@ public class ChildNode {
             return false;
         return true;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("ChildNode [tagName=");
+        builder.append(tagName);
+        builder.append(", tagValue=");
+        builder.append(tagValue);
+        builder.append(", attributeName=");
+        builder.append(attributeName);
+        builder.append(", attributeValue=");
+        builder.append(attributeValue);
+        builder.append(", children=");
+        builder.append(children);
+        builder.append("]");
+        return builder.toString();
+    }
+    
     
 }
