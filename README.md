@@ -3,7 +3,7 @@ aconex-coding-challenge
 
 Exercise project given by Aconex - Pradeep's attempt at creating a simple gedcom parser
 
-https://travis-ci.org/pkumar/aconex-coding-challenge.svg?branch=master
+<img src="https://travis-ci.org/pkumar/aconex-coding-challenge.svg?branch=master" alt="Travis CI Status"/>
 
 Why Maven?
 =======================
