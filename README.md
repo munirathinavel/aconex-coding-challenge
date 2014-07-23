@@ -12,7 +12,7 @@ Just in case, you don't have Maven, instructions here: http://maven.apache.org/g
 
 How to run tests?
 =======================
-cd into the <a href="https://github.com/pkumar/aconex-coding-challenge/tree/master/gedcom-parser">gedcom-parser</a> directory and give "mvn clean test" or "mvn clean verify"
+Clone the project and run "mvn clean test" or "mvn clean verify". For your convenince, I have linked the project to Travis CI and the build status is displayed above. 
 
 
 Choice of project
@@ -21,6 +21,12 @@ GEDCOM parser is chosen as the project could be achieved with Java's rich XML pa
 
 Design and Approach
 =======================
+## Packages : ##
+
+- com.pktr.gedcom.model
+- com.pktr.gedcom.process
+- com.pktr.gedcom.util
+
 
 
 Bugs (known issues) and shortcomings
