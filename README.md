@@ -5,8 +5,7 @@ Exercise project given by Aconex - Pradeep's attempt at creating a simple gedcom
 
 <img src="https://travis-ci.org/pkumar/aconex-coding-challenge.svg?branch=master" alt="Travis CI Status"/>    https://travis-ci.org/pkumar/aconex-coding-challenge
 
-https://codeship.com/projects/87225/status?branch=master
-
+[ ![Codeship Status for pkumar/aconex-coding-challenge](https://codeship.com/projects/98873550-fba9-0132-df81-1658e61aa1b1/status?branch=master)](https://codeship.com/projects/87225)
 
 Why Maven?
 =======================
